@@ -238,7 +238,7 @@ func TestRenderHTMLTemplateEmptyName(t *testing.T) {
 	w := httptest.NewRecorder()
 	templ := template.Must(template.New("").Parse(`Hello {{.name}}`))
 
-	HTML(w, http.StatusOK, "t", templ, map[string]interface{}{
+	HTML(w, http.StatusOK, "", templ, map[string]interface{}{
 		"name": "alexandernyquist",
 	})
 	assert.Equal(t, "Hello alexandernyquist", w.Body.String())
