@@ -9,6 +9,8 @@ import (
 	"github.com/thinkgos/render/render"
 )
 
+type H map[string]interface{}
+
 // bodyAllowedForStatus is a copy of http.bodyAllowedForStatus non-exported function.
 func bodyAllowedForStatus(status int) bool {
 	switch {
