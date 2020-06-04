@@ -20,7 +20,7 @@ $ go build -tags=jsoniter .
 - [protobuf](github.com/golang/protobuf/proto)
 - [yaml](https://github.com/go-yaml/yaml)
    
-render uses `yaml`,`protobuf`,`yaml`, you can build without them with tags.
+render uses `msg`,`protobuf`,`yaml`, you can build without them with tags.
    
 ```sh
    $ go build -tags=noprotopack,noyamlpack,nomsgpack .
