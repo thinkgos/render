@@ -41,7 +41,7 @@ func Render(w http.ResponseWriter, code int, r render.Render) {
 // It also updates the HTTP code and sets the Content-Type as "text/html".
 // See http://golang.org/doc/articles/wiki/
 func HTML(w http.ResponseWriter, code int, name string, tpl *template.Template, obj interface{}) {
-	Render(w, code, render.HTMLProduction{Template: tpl}.Instance(name, obj))
+	Render(w, code, render.HTML{Template: tpl, Name: name, Data: obj})
 }
 
 // IndentedJSON serializes the given struct as pretty JSON (indented + endlines) into the response body.
