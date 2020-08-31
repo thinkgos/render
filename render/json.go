@@ -58,7 +58,7 @@ var (
 )
 var jsonContentType = []string{"application/json; charset=utf-8"}
 var jsonpContentType = []string{"application/javascript; charset=utf-8"}
-var jsonAsciiContentType = []string{"application/json"}
+var jsonASCIIContentType = []string{"application/json"}
 
 // Render (JSON) writes data with custom ContentType.
 func (r JSON) Render(w http.ResponseWriter) (err error) {
@@ -186,7 +186,7 @@ func (r AsciiJSON) Render(w http.ResponseWriter) (err error) {
 
 // WriteContentType (AsciiJSON) writes JSON ContentType.
 func (r AsciiJSON) WriteContentType(w http.ResponseWriter) {
-	writeContentType(w, jsonAsciiContentType)
+	writeContentType(w, jsonASCIIContentType)
 }
 
 // Render (PureJSON) writes custom ContentType and encodes the given interface object.

@@ -1,4 +1,4 @@
-// Package render
+// Package render render for net/http
 package render
 
 import (
@@ -9,6 +9,7 @@ import (
 	"github.com/thinkgos/render/render"
 )
 
+// H is map[string]interface{}
 type H map[string]interface{}
 
 // bodyAllowedForStatus is a copy of http.bodyAllowedForStatus non-exported function.
@@ -96,7 +97,7 @@ func XML(w http.ResponseWriter, code int, obj interface{}) {
 }
 
 // String writes the given string into the response body.
-func String(w http.ResponseWriter, code int, format string, values ...interface{}) {
+func String(w http.ResponseWriter, code int, format string, values ...interface{}) { // nolint: goprintffuncname
 	Render(w, code, render.String{Format: format, Data: values})
 }
 
@@ -111,7 +112,8 @@ func Data(w http.ResponseWriter, code int, contentType string, data []byte) {
 }
 
 // DataFromReader writes the specified reader into the body stream and updates the HTTP code.
-func DataFromReader(w http.ResponseWriter, code int, contentLength int64, contentType string, reader io.Reader, extraHeaders map[string]string) {
+func DataFromReader(w http.ResponseWriter, code int,
+	contentLength int64, contentType string, reader io.Reader, extraHeaders map[string]string) {
 	Render(w, code, render.Reader{
 		Headers:       extraHeaders,
 		ContentType:   contentType,
