@@ -5,3 +5,14 @@
 // +build !nomsgpack
 
 package render
+
+import (
+	"net/http"
+
+	"github.com/thinkgos/render/render"
+)
+
+// MsgPack serializes the given struct as Msgpack into the response body.
+func MsgPack(w http.ResponseWriter, code int, obj interface{}) {
+	Render(w, code, render.MsgPack{obj})
+}

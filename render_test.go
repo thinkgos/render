@@ -5,6 +5,7 @@
 package render
 
 import (
+	"bytes"
 	"encoding/xml"
 	"html/template"
 	"net/http"
@@ -15,12 +16,35 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
+	"github.com/ugorji/go/codec"
 
 	testdata "github.com/thinkgos/render/testdata/protoexample"
 )
 
-// TODO unit tests
-// test errors
+func Test_bodyAllowedForStatus(t *testing.T) {
+	assert.True(t, bodyAllowedForStatus(http.StatusOK))
+	assert.False(t, bodyAllowedForStatus(http.StatusSwitchingProtocols))
+	assert.False(t, bodyAllowedForStatus(http.StatusNotModified))
+	assert.False(t, bodyAllowedForStatus(http.StatusNoContent))
+}
+
+func TestMsgPack(t *testing.T) {
+	w := httptest.NewRecorder()
+	data := map[string]interface{}{
+		"foo": "bar",
+	}
+
+	h := new(codec.MsgpackHandle)
+	assert.NotNil(t, h)
+	buf := bytes.NewBuffer([]byte{})
+	assert.NotNil(t, buf)
+	err := codec.NewEncoder(buf, h).Encode(data)
+	assert.NoError(t, err)
+
+	MsgPack(w, http.StatusOK, data)
+	assert.Equal(t, buf.String(), w.Body.String())
+	assert.Equal(t, "application/msgpack; charset=utf-8", w.Header().Get("Content-Type"))
+}
 
 func TestRenderJSON(t *testing.T) {
 	w := httptest.NewRecorder()
