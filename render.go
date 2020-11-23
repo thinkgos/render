@@ -2,6 +2,7 @@
 package render
 
 import (
+	"fmt"
 	"html/template"
 	"io"
 	"net/http"
@@ -120,4 +121,10 @@ func DataFromReader(w http.ResponseWriter, code int,
 		ContentLength: contentLength,
 		Reader:        reader,
 	})
+}
+
+// Attachment attachment application/octet-stream;charset=utf-8
+func Attachment(w http.ResponseWriter, filename string, data []byte) {
+	w.Header().Add("Content-Disposition", fmt.Sprintf("attachment;filename=\"%s\"", filename))
+	Data(w, http.StatusOK, "application/octet-stream;charset=utf-8", data)
 }

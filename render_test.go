@@ -231,6 +231,16 @@ func TestRenderData(t *testing.T) {
 	assert.Equal(t, "image/png", w.Header().Get("Content-Type"))
 }
 
+func TestRenderAttachment(t *testing.T) {
+	w := httptest.NewRecorder()
+	data := []byte("#!Attachment some raw data")
+
+	Attachment(w, "test.txt", data)
+	assert.Equal(t, "#!Attachment some raw data", w.Body.String())
+	assert.Equal(t, "application/octet-stream;charset=utf-8", w.Header().Get("Content-Type"))
+	assert.Equal(t, "attachment;filename=\"test.txt\"", w.Header().Get("Content-Disposition"))
+}
+
 func TestRenderString(t *testing.T) {
 	w := httptest.NewRecorder()
 
