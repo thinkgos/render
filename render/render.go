@@ -4,7 +4,9 @@
 
 package render
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // Render interface is to be implemented by JSON, XML, HTML, YAML and so on.
 type Render interface {
@@ -16,7 +18,9 @@ type Render interface {
 
 func writeContentType(w http.ResponseWriter, value []string) {
 	header := w.Header()
-	if val := header["Content-Type"]; len(val) == 0 {
-		header["Content-Type"] = value
+	if val := header.Values("Content-Type"); len(val) == 0 {
+		for _, v := range value {
+			header.Add("Content-Type", v)
+		}
 	}
 }

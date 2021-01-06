@@ -38,14 +38,11 @@ func TestRenderJSON(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, "{\"foo\":\"bar\",\"html\":\"\\u003cb\\u003e\"}", w.Body.String())
 	assert.Equal(t, "application/json; charset=utf-8", w.Header().Get("Content-Type"))
-}
 
-func TestRenderJSONPanics(t *testing.T) {
-	w := httptest.NewRecorder()
-	data := make(chan int)
+	dataChan := make(chan int)
 
 	// json: unsupported type: chan int
-	assert.Panics(t, func() { assert.NoError(t, (JSON{data}).Render(w)) })
+	assert.Error(t, (JSON{dataChan}).Render(w))
 }
 
 func TestRenderIndentedJSON(t *testing.T) {
@@ -322,10 +319,8 @@ func TestRenderRedirect(t *testing.T) {
 	}
 
 	w = httptest.NewRecorder()
-	assert.PanicsWithValue(t, "Cannot redirect with status code 200", func() {
-		err := data2.Render(w)
-		assert.NoError(t, err)
-	})
+
+	assert.EqualError(t, data2.Render(w), "Cannot redirect with status code 200")
 
 	data3 := Redirect{
 		Code:     http.StatusCreated,
