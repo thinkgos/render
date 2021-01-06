@@ -320,7 +320,7 @@ func TestRenderRedirect(t *testing.T) {
 
 	w = httptest.NewRecorder()
 
-	assert.EqualError(t, data2.Render(w), "Cannot redirect with status code 200")
+	assert.EqualError(t, data2.Render(w), "cannot redirect with status code 200")
 
 	data3 := Redirect{
 		Code:     http.StatusCreated,

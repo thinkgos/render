@@ -217,7 +217,7 @@ func TestRenderRedirect(t *testing.T) {
 	Redirect(w, req, http.StatusMovedPermanently, "/new/location")
 
 	w = httptest.NewRecorder()
-	assert.PanicsWithError(t, "Cannot redirect with status code 200", func() {
+	assert.PanicsWithError(t, "cannot redirect with status code 200", func() {
 		Redirect(w, req, http.StatusOK, "/new/location")
 	})
 }
