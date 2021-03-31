@@ -3,9 +3,11 @@ package bytesconv
 import (
 	"bytes"
 	"math/rand"
+	"reflect"
 	"strings"
 	"testing"
 	"time"
+	"unsafe"
 )
 
 var testString = "Albert Einstein: Logic will get you from A to B. Imagination will take you everywhere."
@@ -68,6 +70,14 @@ func TestStringToBytes(t *testing.T) {
 	}
 }
 
+// converts string to byte slice without a memory allocation.
+func oldStringToBytes(s string) (b []byte) {
+	sh := *(*reflect.StringHeader)(unsafe.Pointer(&s))
+	bh := (*reflect.SliceHeader)(unsafe.Pointer(&b))
+	bh.Data, bh.Len, bh.Cap = sh.Data, sh.Len, sh.Len
+	return b
+}
+
 // go test -v -run=none -bench=^BenchmarkBytesConv -benchmem=true
 
 func BenchmarkBytesConvBytesToStrRaw(b *testing.B) {
@@ -88,6 +98,11 @@ func BenchmarkBytesConvStrToBytesRaw(b *testing.B) {
 	}
 }
 
+func BenchmarkOldBytesConvStrToBytes(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		oldStringToBytes(testString)
+	}
+}
 func BenchmarkBytesConvStrToBytes(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		StringToBytes(testString)
