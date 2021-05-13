@@ -18,7 +18,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/ugorji/go/codec"
 
-	testdata "github.com/thinkgos/render/testdata/protoexample"
+	testdata "github.com/things-go/render/testdata/protoexample"
 )
 
 func Test_bodyAllowedForStatus(t *testing.T) {

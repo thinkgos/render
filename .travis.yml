@@ -9,8 +9,6 @@ go:
   - 1.15.x
   - 1.16.x
 
-go_import_path: github.com/thinkgos/render
-
 before_install:
   - if [[ "${GO111MODULE}" = "on" ]]; then mkdir "${HOME}/go"; export GOPATH="${HOME}/go";
     export PATH="$GOPATH/bin:$PATH"; fi
@@ -42,4 +40,3 @@ after_success:
 env:
   global:
     - GO111MODULE=on
-    - secure: lvYZbHxhvG5l578zQT4/nhk3AEoXTPm/2BRKnAAkJSRip+IWnbDHSN8m5UQACtU/5AJHfavxlTq5JVzFUQBtB/eD6WDK5YYcLgvx/MelJcZ3aW7TadalvMdZBoVvNUNSABfs4AclxUuWlCiP985Y8fDuzHDP7jd/9LHdAw6VMMYS3PlYfjNH99Y8JXeG5X0EULpgcJS4I26o7+ANlNksjpIl8eyF3ma9mZjWbphRaGqkABWUNtSKF8gA5GUtVvyL01qSKiXKgHumyOJB25EUnys3gzirWExryirUdps2twZFtJ5Ga0zlvFfb0gCcPjGREB0fuP4UCSLY+T3i9+C2g31Pyo+ZEjgDC2fTvGscI3Iv7jMg3IgZyCgyocScPodZDntW4shDypQx+2h90VjsGIu90Ma5h7T/jJFWxIWBDtrMrZ7cMnpbewRL6BWUmCZgFr06kZKOkk5cd4GQ0jz88ZehepTSF2YggyYgIsNMdx/I0XJ4ve1KgLl07IBNaCCY6jN50eD6aa/tHkqESoqa1XdV1+Me3KCDYKxrorhl9O/KDATxUfX1cGr4vBx85IleBHuEgFqjRThLo/hAK4bEpkfixtVg5SzTjJGXGv3PVe+M30qfVUdrGZi6OYVtErPozvHZo3mDpoo4oA+Ygf7usMJMzr9s8zxOaEYxls0QeeQ=

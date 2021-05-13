@@ -10,8 +10,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/thinkgos/render/internal/bytesconv"
-	"github.com/thinkgos/render/internal/json"
+	"github.com/things-go/render/internal/bytesconv"
+	"github.com/things-go/render/internal/json"
 )
 
 // JSON contains the given interface object.

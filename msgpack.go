@@ -9,7 +9,7 @@ package render
 import (
 	"net/http"
 
-	"github.com/thinkgos/render/render"
+	"github.com/things-go/render/render"
 )
 
 // MsgPack serializes the given struct as Msgpack into the response body.

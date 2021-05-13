@@ -9,7 +9,7 @@ package render
 import (
 	"net/http"
 
-	"github.com/thinkgos/render/render"
+	"github.com/things-go/render/render"
 )
 
 // ProtoBuf serializes the given struct as ProtoBuf into the response body.

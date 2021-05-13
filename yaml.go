@@ -9,7 +9,7 @@ package render
 import (
 	"net/http"
 
-	"github.com/thinkgos/render/render"
+	"github.com/things-go/render/render"
 )
 
 // YAML serializes the given struct as YAML into the response body.
